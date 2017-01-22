@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <meta name="author" content="no3z ">
+    <link rel="icon" href="/static/favicon.ico">
+    <title>Home Albenitz Environment</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.css" rel="stylesheet" type="text/css">
+    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>
+    <link href='http://fonts.googleapis.com/css?family=Press+Start+2P' rel='stylesheet' type='text/css'>
+    <style media="screen" type="text/css">
+      @media (min-width: 768px){
+      .navbar-nav {
+      margin: 0 auto;
+      display: table;
+      table-layout: auto;
+      float: none;
+      width: 100%;
+      }
+      .navbar-nav>li {
+      display: table-cell;
+      float: none;
+      text-align: center;
+      }
+      } 
+      body {
+      padding-top: 40px;
+      background: #45484d; /* Old browsers */
+      /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#fcfff4+0,dfe5d7+40,b3bead+100;Wax+3D+%233 */
+      background: rgb(252,255,244); /* Old browsers */
+      background: -moz-linear-gradient(top, rgba(252,255,244,1) 0%, rgba(223,229,215,1) 40%, rgba(179,190,173,1) 100%); /* FF3.6-15 */
+      background: -webkit-linear-gradient(top, rgba(252,255,244,1) 0%,rgba(223,229,215,1) 40%,rgba(179,190,173,1) 100%); /* Chrome10-25,Safari5.1-6 */
+      background: linear-gradient(to bottom, rgba(252,255,244,1) 0%,rgba(223,229,215,1) 40%,rgba(179,190,173,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfff4', endColorstr='#b3bead',GradientType=0 ); /* IE6-9 */
+      }
+      body,
+      p,
+      btn,
+      a,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      .h1,
+      .h2,
+      .h3,
+      .h4,
+      .h5,
+      .h6 {
+      font-family:  'Press Start 2P';
+      font-size: 14px;
+      }
+    </style>
+  </head>  
+  <body> <div class="navbar-wrapper">
+      <div class="container">
+	<div class="navbar navbar-inverse navbar-static-top" role="navigation">
+	  <div class="container">
+	    <div class="navbar-header">
+	      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+	      </button>
+	    </div>
+	    <div class="navbar-collapse collapse">
+	      <ul class="nav navbar-nav">
+                <li class=" dropdown"><a href="#" class="dropdown-toggle active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">albenitz <span class="caret"></span></a>
+		  <ul class="dropdown-menu">
+		    <li><a href="/led/on">Led On</a></li>
+		    <li><a href="/led/off">Led Off</a></li>
+		    <li><a href="/reboot">Reboot</a></li>
+		  </ul>
+		</li>
+		<li><a href="/">Update</a></li>
+		<li><a href="/dashboard">Dashboard</a></li>
+		<li><a href="/video_feed1">Feed1</a></li>
+		<li><a href="/video_feed2">Feed2   </a></li>
+	      </ul>
+	    </div>
+	  </div>
+	</div>
+      </div>
+    </div>   
+   <br> 
+   <div class="container marketing"> <h3>This is how it is @ home</h3></div>
+   <div class='content'>{% block content %}{% endblock %}</div>   
+   <div class="container marketing">
+     <footer>
+      <p>&copy; no3z productionz</p>
+     </footer>    
+   </div><!-- /.container -->    
+  </body>
+</html>

@@ -1,0 +1,32 @@
+{% extends "base.html" %} {% block content %} <div class="container marketing">
+  <div class="row" align='center'>
+  <dl> <table id="table">
+    <thead>
+      {% for key, value in data.iteritems() %}
+    <tr>
+        <th data-field="key" class="key">{{ key }}: </th>
+        <th data-field="value"><ul id={{ key }}>{{ value }}</ul></th>
+    </tr>
+      {% endfor %}
+
+    </thead> </table>
+  </dl>
+   </div> </div>
+ <div class="row" align = "right">
+   <div class="col-sm-8">
+     {% if data['led_on']  %}
+     <a class="btn btn-warning" href="/led/off" role="button">LED ON</a>
+     {% else %}
+     <a class="btn btn-success" href="/led/on" role="button">LED OFF</a>
+     {% endif %}
+   </div>
+ </div>
+<script> $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+  (function(){ $.getJSON( $SCRIPT_ROOT+"/_update", // Your AJAX route here
+  function(data) {
+  for (var key in data) {
+   for( var k2 in data[key]) {
+    document.getElementById(k2).innerHTML = data[key][k2]
+  }		}            }        );
+  setTimeout(arguments.callee, 5000);    })();</script>
+<hr class='featurette-divider'> {% endblock content %}

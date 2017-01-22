@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container marketing">
+    <div class="row" align='center'>  
+    {% for key, value in data.iteritems() %}
+    <a>{{ key }}: {{value}}</a>
+      <div id="{{ key }}_chart"></div>
+	   <script>
+	     var chart = c3.generate({ bindto: '#{{ key }}_chart',
+	     data: { x: 'x', xFormat:'%Y-%m-%d %H:%M:%S',
+	     columns: [
+	     {{ xdata[loop.index0]|tojson|safe }},
+	     {{ ydata[loop.index0] |tojson| safe }} ], type: 'area-spline'
+	     },
+	     axis: { x: { type: 'timeseries', tick: { count: 4, format: '%d/%m %H:%M' } } } });
+	   </script>
+	   <hr class='divider'>
+      {% endfor %}
+</div>
+</div>
+{% endblock %}
