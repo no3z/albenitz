@@ -7,7 +7,7 @@ from functools import wraps
 import subprocess
 import utilities
 import monitor
-import password
+import password as passwd
 
 app = Flask(__name__)
 
