@@ -59,9 +59,7 @@ def dashboard():
     dates = []
     temp_y = []
     cd = monitor.updateData()
-    print cd
     for idx, cdata in enumerate(cd):
-        print idx,cdata
         rows.insert(idx, utilities.get_data(utilities.dbname, interval))
         dates.insert(idx, utilities.create_xaxis(rows[idx]))
         temp_y.insert(idx, utilities.create_yaxis(rows[idx],cdata,idx+1))
