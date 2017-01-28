@@ -8,20 +8,20 @@ import subprocess
 import utilities
 import monitor
 import password as passwd
+import base64
+from flask_socketio import SocketIO, emit, disconnect
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'secret!ohmyohmy'
+socketio = SocketIO(app)
 
 rows = []
+live_feeds = {}
 
 @app.route('/_update', methods= ['GET'] )
 def updateIndexData():
     monitor.updateData()
     return jsonify(data=monitor.data)
-
-def gen(camera):
-    while True:
-        frame = camera.get_frame()
-        yield (b'--frame\r\n'b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
 
 def check_auth(username, password):
     return username == passwd.user and password == passwd.password
@@ -42,15 +42,10 @@ def requires_auth(f):
         return f(*args, **kwargs)
     return decorated
 
-@app.route('/video_feed1')
+@app.route('/feed/<nfeed>')
 @requires_auth
-def video_feed1():
-    return Response(gen(VideoCamera(0)),mimetype='multipart/x-mixed-replace; boundary=frame')
-
-@app.route('/video_feed2')
-@requires_auth
-def video_feed2():
-    return Response(gen(VideoCamera(1)),mimetype='multipart/x-mixed-replace; boundary=frame')
+def feed(nfeed):
+    return render_template('camera.html', cam=nfeed)
 
 @app.route('/dashboard')
 def dashboard():
@@ -86,6 +81,15 @@ def reboot():
 def index():   
     monitor.updateData()
     return render_template('index.html', data=monitor.data)
-
+        
+@socketio.on('start_stream', namespace='/camera_feed')
+def stream_socket(camera):
+    camera = int(camera)
+    if not camera in live_feeds:
+        live_feeds[camera] = VideoCamera(int(camera))
+    frame = base64.b64encode(live_feeds[camera].get_frame())
+    emit('frame', frame)
+            
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=8000, threaded=True)
+    #app.run(debug=True, host='0.0.0.0', port=8000, threaded=True)
+    socketio.run(app, host='0.0.0.0', port=8000, debug=True)
